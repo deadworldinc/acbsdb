@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<title>Таблицы</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.css"/>
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+</head>
+
+<body>
+	<div class="tables-main-container">
+		<div class="tables-inner-container">
+			<div class="left-header">
+				<i class="fa-regular fa-compass" style="margin-right: 5px;"></i>
+				<span class="left-header-text">База данных</span>
+			</div>
+			<div class="left-main-container">
+				<div id="buttonRefreshTable" class="tables-menu-item">
+					<i class="fa-regular fa-arrows-rotate"></i>
+					<span class="default-text" style="margin-left: 5px;">Обновить таблицу</span>
+				</div>
+				<div class="tables-menu-item">
+					<i class="fa-regular fa-circle-plus"></i>
+					<span class="default-text" style="margin-left: 5px;">Добавить запись</span>
+				</div>
+				<div class="tables-menu-item">
+					<i class="fa-regular fa-circle-minus"></i>
+					<span class="default-text" style="margin-left: 5px;">Редактировать запись</span>
+				</div>
+				<div class="tables-menu-item">
+					<i class="fa-regular fa-circle-xmark"></i>
+					<span class="default-text" style="margin-left: 5px;">Удалить запись</span>
+				</div>
+			</div>
+		</div>
+		<div class="tables-inner-container">
+			<div class="right-header">
+				<div class="search-field-container">
+					<input class="search-input" placeholder="Поиск по дате">
+					<div class="button-search">
+						<i class="fa-solid fa-magnifying-glass fa-xs"></i>
+					</div>
+				</div>
+				<div class="search-field-container">
+					<input class="search-input" placeholder="Поиск по названию">
+					<div class="button-search">
+						<i class="fa-solid fa-magnifying-glass fa-xs"></i>
+					</div>
+				</div>
+				<div class="button-export">
+					<i class="fa-regular fa-folder fa-sm fa" style="font-size: 13px;"></i>
+					<span class="button-export-text" style="margin-left: 5px;">Экспорт</span>
+				</div>
+			</div>
+			<div class="right-main-container">
+				<table class="main-table">
+					<thead>
+						<tr>
+							<td>ID</td>
+							<td>Название</td>
+							<td>Дата</td>
+							<td>Описание</td>
+							<td>Тег</td>
+						</tr>
+					</thead>
+					<tbody id="tableBody"></tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<script type="module" src="tablesScript.js"></script>
+</body>
+</html>

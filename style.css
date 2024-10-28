@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+    height: 100%;
+    font-family: "Roboto", sans-serif;
+    background-color: #f3f4f6;
+    font-style: normal;
+    padding: 0;
+    margin: 0;
+}
+
+.menu {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-inner {
+    width: 300px;
+    padding: 30px;
+    border-radius: 15px;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+.default-image {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border: 3px dashed #4280ef;
+}
+
+.image-and-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.description-container {
+    margin-top: 20px;
+    width: 260px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 20px;
+}
+
+.description-text {
+    width: fit-content;
+    font-size: 14px;
+    opacity: 0.75;
+}
+
+.inputs-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.input-field {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition-duration: 250ms;
+}
+
+.input-field:focus {
+    outline: none;
+    border: 1px solid #4cc6f9;
+    background-color: #cbeffd;
+    transition-duration: 250ms;
+}
+
+.default-button {
+    margin-top: 10px;
+    padding: 15px;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    background-color: #4280ef;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    transition-duration: 250ms;
+}
+
+.default-button:hover {
+    box-shadow: 0px 0px 10px rgba(66, 128, 239, 0.5);
+}
+
+.default-button:active {
+    transform: scale(0.95);
+    transition-duration: 250ms;
+}
+
+.tables-main-container {
+    width: 100%;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 300px auto;
+}
+
+.tables-inner-container {
+    width: 100%;
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: 50px auto;
+}
+
+.left-header {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.left-main-container {
+    background-color: white;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.right-header {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    background-color: white;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.search-field-container {
+    width: 200px;
+    height: 30px;
+    margin-right: 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    padding: 7px;
+    width: 150px;
+    border-radius: 5px 0px 0px 5px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition-duration: 250ms;
+}
+
+.search-input:focus {
+    outline: none;
+    border: 1px solid #4cc6f9;
+    background-color: #cbeffd;
+    transition-duration: 250ms;
+}
+
+.button-search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-left: none;
+    border-radius: 0px 5px 5px 0px;
+    transition-duration: 250ms;
+}
+
+.button-search:hover {
+    background-color: #4280ef;
+    color: white;
+    transition-duration: 250ms;
+    cursor: pointer;
+}
+
+.button-export {
+    width: 100px;
+    height: 30px;
+    margin-right: 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #4cc6f9;
+    background-color: #cbeffd;
+    cursor: pointer;
+    transition-duration: 250ms;
+}
+
+.button-export:hover {
+    background-color: #4280ef;
+    color: white;
+    transition-duration: 250ms;
+    border: 1px solid #4280ef;
+}
+
+.button-export:hover .button-export-text {
+    opacity: 1;
+}
+
+.button-export:hover .fa {
+    opacity: 1;
+}
+
+.fa {
+    opacity: 0.75;
+}
+
+.button-export-text {
+    font-size: 13px;
+    opacity: 0.75;
+}
+
+.default-text {
+    font-size: 14px;
+}
+
+.tables-menu-item {
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    transition-duration: 250ms;
+    cursor: pointer;
+}
+
+.tables-menu-item:hover {
+    background-color: #f3f4f6;
+    transition-duration: 250ms;
+}
+
+.main-table {
+    width: 100%;
+    border-spacing: 0;
+}
+
+td {
+    padding: 10px;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    font-weight: 400;
+    font-size: 14px;
+    text-align: center;
+}
+
+.main-table-cell {
+    background-color: white;
+    text-align: start;
+}
