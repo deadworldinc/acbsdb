@@ -2,12 +2,14 @@
 <html lang="ru">
 
 <head>
-	<title>Таблицы</title>
+	<title>База данных</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.css"/>
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+	<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+	<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
 </head>
 
 <body>
@@ -50,6 +52,26 @@
 			<button id="buttonDeleteEntryById" class="default-button" style="width: 350px;">Удалить запись</button>
 		</div>
 	</dialog>
+	<dialog id="dialogServiceInfo" style="position: fixed; z-index: 2; margin: auto; width: 420px;">
+		<div style="display: flex; justify-content: center; align-items: center;">
+			<i class="fa-regular fa-circle-info"></i>
+			<span class="default-text" style="margin-left: 5px;">О базе данных</span>
+		</div>
+		<div style="margin-top: 10px; width: 410px;">
+			<div style="background-color: #f3f4f6; padding: 20px; border-radius: 10px; margin-top: 20px;">
+				<i class="fa-regular fa-circle-check"></i>
+				<span class="default-text" style="margin-left: 5px;">Количество записей в базе данных: <span id="spanEntriesCount" class="default-text">0</span></span>
+			</div>
+			<div style="background-color: #f3f4f6; padding: 20px; border-radius: 10px; margin-top: 10px;">
+				<i class="fa-regular fa-circle-user"></i>
+				<span class="default-text" style="margin-left: 5px;">Количество зарегистрированных пользователей: 2</span>
+			</div>
+			<div style="background-color: #f3f4f6; padding: 20px; border-radius: 10px; margin-top: 10px;">
+				<i class="fa-regular fa-compass"></i>
+				<span class="default-text" style="margin-left: 5px;">Версия: <span class="default-text">1.2</span></span>
+			</div>
+		</div>
+	</dialog>
 	<div class="tables-main-container">
 		<div class="tables-inner-container">
 			<div class="left-header">
@@ -73,13 +95,9 @@
 					<i class="fa-regular fa-circle-xmark"></i>
 					<span class="default-text" style="margin-left: 5px;">Удалить запись</span>
 				</div>
-				<div id="buttonDeleteEntry" class="tables-menu-item" style="display: none;">
-					<i class="fa-regular fa-clock-rotate-left"></i>
-					<span class="default-text" style="margin-left: 5px;">Журнал действий</span>
-				</div>
-				<div id="buttonDeleteEntry" class="tables-menu-item" style="display: none;">
-					<i class="fa-regular fa-microchip"></i>
-					<span class="default-text" style="margin-left: 5px;">Служебная информация</span>
+				<div id="buttonServiceInfo" class="tables-menu-item">
+					<i class="fa-regular fa-circle-info"></i>
+					<span class="default-text" style="margin-left: 5px;">О базе данных</span>
 				</div>
 				<div id="buttonSignOut" class="tables-menu-item">
 					<i class="fa-regular fa-power-off"></i>
@@ -90,14 +108,14 @@
 		<div class="tables-inner-container">
 			<div class="right-header">
 				<div class="search-field-container">
-					<input id="inputSearchByDate" class="search-input" placeholder="Поиск по дате" autocomplete="off">
-					<div id="buttonSearchByDate" class="button-search">
+					<input id="inputSearchByTitle" class="search-input" placeholder="Поиск по названию" autocomplete="off">
+					<div id="buttonSearchByTitle" class="button-search">
 						<i class="fa-solid fa-magnifying-glass fa-xs"></i>
 					</div>
 				</div>
 				<div class="search-field-container">
-					<input id="inputSearchByTitle" class="search-input" placeholder="Поиск по названию" autocomplete="off">
-					<div id="buttonSearchByTitle" class="button-search">
+					<input id="inputSearchByDate" class="search-input" placeholder="Поиск по дате" autocomplete="off">
+					<div id="buttonSearchByDate" class="button-search">
 						<i class="fa-solid fa-magnifying-glass fa-xs"></i>
 					</div>
 				</div>
@@ -107,13 +125,16 @@
 						<i class="fa-solid fa-magnifying-glass fa-xs"></i>
 					</div>
 				</div>
-				<div class="button-export">
+				<div class="search-field-container" style="width: 100px;">
+					<input id="inputYear" class="search-input" placeholder="Год" autocomplete="off" style="width: 80px; border-radius: 5px; text-align: center;">
+				</div>
+				<div id="buttonExport" class="button-export">
 					<i class="fa-regular fa-folder fa-sm fa" style="font-size: 13px;"></i>
 					<span class="button-export-text" style="margin-left: 5px;">Экспорт</span>
 				</div>
 			</div>
 			<div class="right-main-container">
-				<table id="mainTable" class="main-table">
+				<table id="mainTable" class="main-table sortable">
 					<thead>
 						<tr>
 							<td>ID</td>

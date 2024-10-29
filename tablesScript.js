@@ -1,4 +1,5 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+import { read, writeFileXLSX } from "https://cdn.sheetjs.com/xlsx-0.20.3/package/xlsx.mjs";
 
 const supabase = createClient('https://hlapzydzkeyttgmughiu.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhsYXB6eWR6a2V5dHRnbXVnaGl1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjkxNDc4NzAsImV4cCI6MjA0NDcyMzg3MH0.fNlhkzfU5RZURQpfu1sTz4EjWL-ImWRvGNx0mMBwuE8');
 
@@ -28,13 +29,12 @@ async function getData(isSearch, searchColumn, searchValue) {
     }
 
     for (let entry in receivedData) {
-        console.log(receivedData[entry].title);
         tableRow.insertAdjacentHTML('beforeBegin', 
             `
             <tr class="table-rows">
                 <td class="main-table-cell">${receivedData[entry].id}</td>
                 <td class="main-table-cell">${receivedData[entry].title}</td>
-                <td class="main-table-cell">${new Date(Date.parse(receivedData[entry].date)).toLocaleDateString("ru-RU")}</td>
+                <td class="main-table-cell">${receivedData[entry].date}</td>
                 <td class="main-table-cell">${receivedData[entry].description}</td>
                 <td class="main-table-cell">${receivedData[entry].tag}</td>
             </tr>
@@ -91,10 +91,13 @@ window.onload = async function() {
         let buttonAddEntry = document.getElementById("buttonAddEntry");
         let buttonEditEntry = document.getElementById("buttonEditEntry");
         let buttonDeleteEntry = document.getElementById("buttonDeleteEntry");
+        let buttonServiceInfo = document.getElementById("buttonServiceInfo");
+        let buttonSignOut = document.getElementById("buttonSignOut");
+
         let dialogAddEntry = document.getElementById("dialogAddEntry");
         let dialogEditEntry = document.getElementById("dialogEditEntry");
         let dialogDeleteEntry = document.getElementById("dialogDeleteEntry");
-        let buttonSignOut = document.getElementById("buttonSignOut");
+        let dialogServiceInfo = document.getElementById("dialogServiceInfo");
 
         let inputSearchByTag = document.getElementById("inputSearchByTag");
         let buttonSearchByTag = document.getElementById("buttonSearchByTag");
@@ -102,6 +105,8 @@ window.onload = async function() {
         let buttonSearchByTitle = document.getElementById("buttonSearchByTitle");
         let inputSearchByDate = document.getElementById("inputSearchByDate");
         let buttonSearchByDate = document.getElementById("buttonSearchByDate");
+        let inputYear = document.getElementById("inputYear");
+        let buttonExport = document.getElementById("buttonExport");
 
         getData(false);
 
@@ -123,6 +128,11 @@ window.onload = async function() {
                 .from('events')
                 .insert({ date: inputDate.value, description: inputDescription.value, tag: inputTag.value, title: inputTitle.value });
 
+                inputTitle.value = "";
+                inputDescription.value = "";
+                inputDate.value = "";
+                inputTag.value = "";
+                
                 dialogAddEntry.close();
                 getData(false);
             }
@@ -194,6 +204,19 @@ window.onload = async function() {
             setOnOutsideDialogClickListener(dialogDeleteEntry);
         }
 
+        buttonServiceInfo.onclick = async function() {
+            dialogServiceInfo.showModal();
+
+            let spanEntriesCount = document.getElementById("spanEntriesCount");
+
+            const { count } = await supabase
+                .from('events')
+                .select('*', { count: 'exact', head: true });
+            spanEntriesCount.textContent = count;
+            
+            setOnOutsideDialogClickListener(dialogServiceInfo);
+        }
+
         buttonSignOut.onclick = function() {
             setCookie('signInStatus', 'unsigned', {});
             window.open("index.html", "_self");
@@ -224,6 +247,30 @@ window.onload = async function() {
             else {
                 getData(false);
             }
+        }
+
+        buttonExport.onclick = async function() {
+            let receivedData;
+
+            if (inputYear.value != "") {
+                const { data, error } = await supabase
+                .from('events')
+                .select()
+                .ilike('date', `%${inputYear.value}%`)
+                .csv();
+                receivedData = JSON.parse(JSON.stringify(data));
+            }
+            else {
+                const { data, error } = await supabase
+                .from('events')
+                .select()
+                .csv();
+                receivedData = data;
+            }
+
+            let csv_string = receivedData.toString().replace("id", "ID").replace("date", "Дата").replace("description", "Описание").replace("tag", "Тег").replace("title", "Название");
+            let xlsxFile = XLSX.read(csv_string, { type: "string" });
+            XLSX.writeFileXLSX(xlsxFile, "Database.xlsx");
         }
     } else {
         window.open("index.html", "_self");
