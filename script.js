@@ -34,6 +34,12 @@ function getCookie(name) {
 }
 
 window.onload = function() {
+	if (getCookie('signInStatus') == 'signed') {
+		window.open("tables.html", "_self");
+	} else {
+		setCookie('signInStatus', 'unsigned', {});
+	}
+
     let inputLogin = document.getElementById("inputLogin");
     let inputPassword = document.getElementById("inputPassword");
     let buttonLogin = document.getElementById("buttonLogin");
@@ -47,12 +53,11 @@ window.onload = function() {
         let receivedPassword = JSON.parse(JSON.stringify(data[0])).password;
         
         if(inputPassword.value == receivedPassword) {
-            setCookie('userStatus', 'signed', {});
-            alert("Ok!");
+            setCookie('signInStatus', 'signed', {});
+			window.open("tables.html", "_self");
         }
         else {
-            setCookie('userStatus', 'unsigned', {});
-            alert("Wrong!");
+            setCookie('signInStatus', 'unsigned', {});
         }
 
         console.log(receivedPassword);

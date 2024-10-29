@@ -11,6 +11,45 @@
 </head>
 
 <body>
+	<dialog id="dialogAddEntry" style="position: fixed; z-index: 2; margin: auto;">
+		<div style="display: flex; justify-content: center; align-items: center;">
+			<i class="fa-regular fa-circle-plus"></i>
+			<span class="default-text" style="margin-left: 5px;">Добавление записи</span>
+		</div>
+		<div style="margin-top: 10px; width: 319px;">
+			<input id="inputTitle" class="input-field" placeholder="Название" autocomplete="off">
+			<input id="inputDescription" class="input-field" placeholder="Описание" autocomplete="off">
+			<input id="inputDate" class="input-field" placeholder="Дата" autocomplete="off">
+			<input id="inputTag" class="input-field" placeholder="Тег" autocomplete="off">
+			<button id="buttonSave" class="default-button" style="width: 350px;">Сохранить</button>
+		</div>
+	</dialog>
+	<dialog id="dialogEditEntry" style="position: fixed; z-index: 2; margin: auto;">
+		<div style="display: flex; justify-content: center; align-items: center;">
+			<i class="fa-regular fa-circle-minus"></i>
+			<span class="default-text" style="margin-left: 5px;">Редактирование записи</span>
+		</div>
+		<div style="margin-top: 10px; width: 319px;">
+			<input id="inputId" class="input-field" placeholder="ID" autocomplete="off">
+			<div id="inputsContainer" style="display: none;">
+				<input id="inputTitleEdit" class="input-field" placeholder="Название" autocomplete="off">
+				<input id="inputDescriptionEdit" class="input-field" placeholder="Описание" autocomplete="off">
+				<input id="inputDateEdit" class="input-field" placeholder="Дата" autocomplete="off">
+				<input id="inputTagEdit" class="input-field" placeholder="Тег" autocomplete="off">
+			</div>
+			<button id="buttonGetEntry" class="default-button" style="width: 350px;">Получить данные</button>
+		</div>
+	</dialog>
+	<dialog id="dialogDeleteEntry" style="position: fixed; z-index: 2; margin: auto;">
+		<div style="display: flex; justify-content: center; align-items: center;">
+			<i class="fa-regular fa-circle-xmark"></i>
+			<span class="default-text" style="margin-left: 5px;">Удаление записи</span>
+		</div>
+		<div style="margin-top: 10px; width: 319px;">
+			<input id="inputDeleteById" class="input-field" placeholder="ID" autocomplete="off">
+			<button id="buttonDeleteEntryById" class="default-button" style="width: 350px;">Удалить запись</button>
+		</div>
+	</dialog>
 	<div class="tables-main-container">
 		<div class="tables-inner-container">
 			<div class="left-header">
@@ -22,31 +61,49 @@
 					<i class="fa-regular fa-arrows-rotate"></i>
 					<span class="default-text" style="margin-left: 5px;">Обновить таблицу</span>
 				</div>
-				<div class="tables-menu-item">
+				<div id="buttonAddEntry" class="tables-menu-item">
 					<i class="fa-regular fa-circle-plus"></i>
 					<span class="default-text" style="margin-left: 5px;">Добавить запись</span>
 				</div>
-				<div class="tables-menu-item">
+				<div id="buttonEditEntry" class="tables-menu-item">
 					<i class="fa-regular fa-circle-minus"></i>
 					<span class="default-text" style="margin-left: 5px;">Редактировать запись</span>
 				</div>
-				<div class="tables-menu-item">
+				<div id="buttonDeleteEntry" class="tables-menu-item">
 					<i class="fa-regular fa-circle-xmark"></i>
 					<span class="default-text" style="margin-left: 5px;">Удалить запись</span>
+				</div>
+				<div id="buttonDeleteEntry" class="tables-menu-item" style="display: none;">
+					<i class="fa-regular fa-clock-rotate-left"></i>
+					<span class="default-text" style="margin-left: 5px;">Журнал действий</span>
+				</div>
+				<div id="buttonDeleteEntry" class="tables-menu-item" style="display: none;">
+					<i class="fa-regular fa-microchip"></i>
+					<span class="default-text" style="margin-left: 5px;">Служебная информация</span>
+				</div>
+				<div id="buttonSignOut" class="tables-menu-item">
+					<i class="fa-regular fa-power-off"></i>
+					<span class="default-text" style="margin-left: 5px;">Выйти из аккаунта</span>
 				</div>
 			</div>
 		</div>
 		<div class="tables-inner-container">
 			<div class="right-header">
 				<div class="search-field-container">
-					<input class="search-input" placeholder="Поиск по дате">
-					<div class="button-search">
+					<input id="inputSearchByDate" class="search-input" placeholder="Поиск по дате" autocomplete="off">
+					<div id="buttonSearchByDate" class="button-search">
 						<i class="fa-solid fa-magnifying-glass fa-xs"></i>
 					</div>
 				</div>
 				<div class="search-field-container">
-					<input class="search-input" placeholder="Поиск по названию">
-					<div class="button-search">
+					<input id="inputSearchByTitle" class="search-input" placeholder="Поиск по названию" autocomplete="off">
+					<div id="buttonSearchByTitle" class="button-search">
+						<i class="fa-solid fa-magnifying-glass fa-xs"></i>
+					</div>
+				</div>
+				<div class="search-field-container">
+					<input id="inputSearchByTag" class="search-input" placeholder="Поиск по тегу" autocomplete="off">
+					<div id="buttonSearchByTag" class="button-search">
 						<i class="fa-solid fa-magnifying-glass fa-xs"></i>
 					</div>
 				</div>
@@ -56,7 +113,7 @@
 				</div>
 			</div>
 			<div class="right-main-container">
-				<table class="main-table">
+				<table id="mainTable" class="main-table">
 					<thead>
 						<tr>
 							<td>ID</td>
@@ -66,7 +123,7 @@
 							<td>Тег</td>
 						</tr>
 					</thead>
-					<tbody id="tableBody"></tbody>
+					<tr id="tableRow"></tr>
 				</table>
 			</div>
 		</div>

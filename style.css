@@ -257,3 +257,14 @@ td {
     background-color: white;
     text-align: start;
 }
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+  
+dialog {
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    width: 350px;
+}
