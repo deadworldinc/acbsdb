@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<title>Добро пожаловать в музей «Абакан 1941-1945»!</title>
+	<link rel="stylesheet" type="text/css" href="/museum/style-museum.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
+</head>
+
+<body>
+    <span id="museumHeader" class="museum-header first-header">Добро пожаловать в музей «Абакан 1941-1945»!</span>
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <div class="museum-image-and-poem">
+            <a class="fancybox" data-fancybox data-src="https://fmba.gov.ru/upload/iblock/329/9e1qrzsv0a16aaylkfa8u02mte9o59je/photo_2025_01_15_15_31_48.jpg"><img src="https://fmba.gov.ru/upload/iblock/329/9e1qrzsv0a16aaylkfa8u02mte9o59je/photo_2025_01_15_15_31_48.jpg" style="object-fit: cover; width: 450px; height: 450px; border-radius: 20px;"></a>
+            <span style="margin-left: 40px; font-size: 13px;"><span style="font-weight: bold; font-size: 16px;">Победа!</span><br><br>Четыре года поражений и побед,<br><br>Четыре года – труд невыносимый!<br><br>
+                Война не понимает слова «Нет!»<br><br>И признает лишь мужество и силу.<br><br>Четыре года отступлений и атак,<br><br>
+                Четыре года к цели шли единой,<br><br>Пока был не разбит коварный враг,<br><br>И Знамя Мира водрузили мы в Берлине.<br><br>
+                Четыре года для Вселенной - всего миг,<br><br>Четыре года для планеты – мало.<br><br>России не вернуть сынов своих…<br><br>
+                Она их вознесла на пьедесталы!<br><br><br>Г. Канкеева
+            </span>
+        </div>
+    </div>
+    <span class="museum-header" style="margin-top: 20px;">Основные разделы музея</span>
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <div class="main-sections-container">
+            <div id="buttonImenamiGeroev" class="main-section scaleable">
+                <img src="https://цбс.абакан.рф/museum-41-45/image/old_abakan.jpg">
+                <div class="main-section-text">
+                    <span>Именами героев</span>
+                </div>
+            </div>
+            <div id="buttonGospitali" class="main-section scaleable">
+                <img src="https://цбс.абакан.рф/museum-41-45/image/voinam--umershim-ot-ran-v-gospitalyah-abakana_11332650.jpg">
+                <div class="main-section-text">
+                    <span>Эвакогоспитали Абакана</span>
+                </div>
+            </div>
+            <div id="buttonJivopis" class="main-section scaleable">
+                <img src="https://цбс.абакан.рф/museum-41-45/image/risunok.jpg">
+                <div class="main-section-text">
+                    <span>Живопись</span>
+                </div>
+            </div>
+            <div id="buttonPromishlennost" class="main-section scaleable">
+                <img src="https://цбс.абакан.рф/museum-41-45/image/promishlenost.jpg">
+                <div class="main-section-text">
+                    <span>В тылу, как в бою!</span>
+                </div>
+            </div>
+            <div id="buttonChtobiPomnili" class="main-section scaleable">
+                <img src="https://цбс.абакан.рф/museum-41-45/image/gl.jpg">
+                <div class="main-section-text">
+                    <span>Чтобы помнили!</span>
+                </div>
+            </div>
+            <div id="buttonPamyatniki" class="main-section scaleable">
+                <img src="https://цбс.абакан.рф/museum-41-45/image/gl1-1.jpg">
+                <div class="main-section-text">
+                    <span>Памятники</span>
+                </div>
+            </div>
+            <div id="buttonLiteratura" class="main-section scaleable" style="width: 760px;">
+                <img src="https://цбс.абакан.рф/museum-41-45/image/literatura.jpg" style="width: 740px;">
+                <div class="main-section-text" style="width: 760px;">
+                    <span>Война в хакасской литературе</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="museum-bottom-text-container" style="margin-top: 20px;">
+        <div class="museum-bottom-text" style="display: block;">
+            &emsp;&emsp;С каждым годом все дальше уходят от нас события Великой Отечественной войны, самой жестокой и наиболее кровавой из всех войн. О войне можно говорить по-разному: скорбно и торжественно, с любопытством школьника и бесстрастием ученого, важно передать память о ней будущим поколениям.
+            <br><br>&emsp;&emsp;В полной мере судьбу советского народа в годы Великой Отечественной войны разделил и город Абакан. Целью виртуального музея «Абакан 1941-1945» является сохранение информации об экономической и культурной жизни города в годы войны; знакомство с фактами и статистикой, предоставление возможности окунуться в атмосферу Абакана тех лет, узнать, о чем думали и говорили, как работали абаканцы.
+            <br><br>&emsp;&emsp;Материал виртуального музея сгруппирован по нескольким тематическим разделам. Каждый раздел открывается краткой вступительной статьей, снабжен фото, газетными статьями и другими документами.
+            <br><br>&emsp;&emsp;При работе над виртуальным музеем использованы материалы Государственного казенного учреждения Республики Хакасия «Национальный архив», Отдела военного комиссариата Республики Хакасия по городу Абакану, музея «Боевой и трудовой славы» Муниципального бюджетного общеобразовательного учреждения города Абакана «Средняя общеобразовательная школа №10» (руководитель музея: Конева З. Ф.), музея-комнаты «Боевой славы» Муниципального бюджетного общеобразовательного учреждения города Абакана «Средняя общеобразовательная школа №9» (клуб «Пирятенец», руководитель клуба: Фоминых Т. А.), Муниципального бюджетного учреждения культуры города Абакана «Абаканская централизованная библиотечная система», Муниципального бюджетного общеобразовательного учреждения города Абакана «Средняя общеобразовательная школа № 5».
+            <br><br>&emsp;&emsp;Уважаемые посетители виртуального музея «Абакан 1941-1945 годов», участвовать в создании музея может каждый из вас. Если вы располагаете материалом, который не нашел отражения в разделах нашего музея, вы можете сообщить нам об этом по e-mail: 
+            <span class="link" style="text-decoration: underline; text-decoration-thickness: 2px;">bibliograf.2010@mail.ru.<span>
+        </div>
+    </div>
+    <span class="museum-header">Хроника военных лет</span>
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <div id="firstYearLink" class="museum-date link scaleable"><span>1941</span></div>
+        <div id="secondYearLink" class="museum-date link scaleable"><span>1942</span></div>
+        <div id="thirdYearLink" class="museum-date link scaleable"><span>1943</span></div>
+        <div id="fourthYearLink" class="museum-date link scaleable"><span>1944</span></div>
+        <div id="fifthYearLink" class="museum-date link scaleable"><span>1945</span></div>
+    </div>
+    <div class="museum-bottom-text-container">
+        <div class="museum-bottom-text" style="display: block; justify-content: left; padding: 30px;">
+            <div>
+                <i class="fa-regular fa-circle-up-right"></i>
+                <span id="firstSourceLink" class="link" style="margin-left: 5px;">Абакан в «сороковые, роковые» / подготовила Т. Зыкова // Абакан. – 2011. - № 22 (25-31 мая). – С. 8.</span>
+            </div>
+            <div style="margin-top: 10px;">
+                <i class="fa-regular fa-circle-up-right"></i>
+                <span id="secondSourceLink" class="link" style="margin-left: 5px;">Антипина, Л. Абакан в годы войны // Хакасия. – 2005. – 12 апреля.</span>
+            </div>
+            <div style="margin-top: 10px;">
+                <i class="fa-regular fa-circle-up-right"></i>
+                <span id="thirdSourceLink" class="link" style="margin-left: 5px;">Кедрин, А. Самые тяжелые 10 лет // Абакан. – 2011. - № 11 (9-15 марта). – С. 12.</span>
+            </div>
+        </div>
+    </div>
+    <div id="buttonOpenGoogleMaps" class="museum-bottom-text-container" style="margin: 20px 0px;">
+        <div class="museum-bottom-text link scaleable" style="padding: 30px;">
+            <i class="fa-regular fa-circle-up-right"></i>
+            <span style="margin-left: 5px;">Пройти по улицам нашего города начиная от МБУК "АЦБС" (требуется интернет-соединение)</span>
+        </div>
+    </div>
+    <div id="websiteInfo" class="website-info">
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <i class="fa-regular fa-code"></i>
+            <span style="margin-left: 5px;">
+                Created and designed by
+            </span>
+            <div class="creator-info" onclick="window.open('https:\/\/github.com/KolyaFedorenko')">
+                <img src="https://avatars.githubusercontent.com/u/79241854?v=4" style="width: 15px; height: 15px; border-radius: 50%; object-fit: cover; opacity: 0.75;">
+                <span style="margin-left: 5px;">
+                    KolyaFedorenko
+                </span>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="museumMainPageScript.js"></script>
+</body>
+</html>

@@ -4,19 +4,18 @@
 <head>
 	<title>Вход в базу данных</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
-    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
 </head>
 
 <body>
     <div class="menu">
-        <div class="menu-inner">
+        <div id="menuInner" class="menu-inner">
             <div class="image-and-title">
                 <lottie-player src="images/startAnimation3.json" background="transparent"  speed="1"  style="width: 300px; height: 200px;" autoplay></lottie-player>
             </div>
-            <div class="description-container">
+            <div id="descriptionsContainer" class="description-container">
                 <i class="fa-regular fa-circle-info" style="padding: 18px 15px 10px 0px; opacity: 0.75;"></i>
                 <span class="description-text">Добро пожаловать! Для доступа к базе данных, пожалуйста,
                     введите логин и пароль.
@@ -26,6 +25,20 @@
                 <input id="inputLogin" class="input-field" placeholder="Логин" autocomplete="off">
                 <input id="inputPassword" class="input-field" placeholder="Пароль" type="password" autocomplete="off">
                 <button id="buttonLogin" class="default-button">Войти</button>
+            </div>
+        </div>
+        <div id="websiteInfo" class="website-info">
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <i class="fa-regular fa-code"></i>
+                <span style="margin-left: 5px;">
+                    Created and designed by
+                </span>
+                <div class="creator-info" onclick="window.open('https:\/\/github.com/KolyaFedorenko')">
+                    <img src="https://avatars.githubusercontent.com/u/79241854?v=4" style="width: 15px; height: 15px; border-radius: 50%; object-fit: cover; opacity: 0.75;">
+                    <span style="margin-left: 5px;">
+                        KolyaFedorenko
+                    </span>
+                </div>
             </div>
         </div>
     </div>
