@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<title>Именами героев</title>
+	<link rel="stylesheet" type="text/css" href="/museum/style-museum.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
+</head>
+
+<body>
+    <span class="museum-header" style="font-size: 30px;">Именами героев</span>
+    <div class="museum-bottom-text-container" style="padding: 0; margin-top: 20px;">
+        <div class="museum-bottom-text" style="display: block;">
+            &emsp;&emsp;Огромное количество людских судеб переломала война! Огромное количество имен остаются неизвестными до сих пор! Память о них – наша общая память.
+            <br><br>&emsp;&emsp;18187 абаканцев сражались на фронтах Великой Отечественной войны. 5198 человек не вернулись из боя, более 12 тысяч человек вернулись с войны с ранениями и контузиями (по учетным данным военного комиссариата г. Абакана). Они – летчики и моряки, танкисты и артиллеристы, пехотинцы – насмерть стояли за пядь родной земли. В одном строю сражались бок о бок люди разных профессий.
+            <br><br>&emsp;&emsp;Как свидетельство безграничного уважения нашего народа к героям, отдавшим жизнь за Родину, созданы в Абакане памятники боевой славы, установлены мемориальные доски, шестнадцать улиц носят их имена. Десяти улицам присвоены имена наших земляков.
+            <br><br>&emsp;&emsp;В этом разделе собран материал о героях Великой Отечественной войны, имена которых носят улицы нашего города, памятных местах, увековечивающих их имена.
+        </div>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <div class="main-sections-container">
+            <div id="domojakovContainer" class="main-section scaleable">
+                <img src="https://цбс.абакан.рф/museum-41-45/image/domogakov.jpg">
+                <div class="main-section-text">
+                    <span>Доможаков Михаил <br>Егорович<br>(1915 – 1993 гг.)</span>
+                </div>
+            </div>
+            <div id="kilchichakovContainer" class="main-section scaleable">
+                <img src="https://цбс.абакан.рф/museum-41-45/image/kilchichakov.jpg">
+                <div class="main-section-text">
+                    <span>Кильчичаков Михаил <br>Еремеевич<br>(1919 – 1990 гг.)</span>
+                </div>
+            </div>
+            <div id="popovContainer" class="main-section scaleable">
+                <img src="https://цбс.абакан.рф/museum-41-45/image/Popov.jpg">
+                <div class="main-section-text">
+                    <span>Попов Павел <br>Фомич<br>(1906 – 1944 гг.)</span>
+                </div>
+            </div>
+            <div id="ugujakovContainer" class="main-section scaleable">
+                <img src="https://цбс.абакан.рф/museum-41-45/image/ugugakov.jpg">
+                <div class="main-section-text">
+                    <span>Угужаков Василий <br>Архипович<br>(1925-1999 гг.)</span>
+                </div>
+            </div>
+            <div id="cukanovaContainer" class="main-section scaleable">
+                <img src="https://цбс.абакан.рф/museum-41-45/image/cukanova.jpg">
+                <div class="main-section-text">
+                    <span>Цуканова Мария <br>Никитична<br>(1924 – 1945 гг.)</span>
+                </div>
+            </div>
+            <div id="suvorovContainer" class="main-section scaleable">
+                <img src="https://цбс.абакан.рф/museum-41-45/image/suvorov.jpg">
+                <div class="main-section-text">
+                    <span>Суворов Георгий <br>Кузьмич<br>(1919 – 1944 гг.)</span>
+                </div>
+            </div>
+            <div id="makarenkoContainer" class="main-section scaleable">
+                <img src="https://цбс.абакан.рф/museum-41-45/image/makarenko.jpg">
+                <div class="main-section-text">
+                    <span>Макаренко Николай <br>Николаевич<br>(1920 – 1995 гг.)</span>
+                </div>
+            </div>
+            <div id="perekreshenkoContainer" class="main-section scaleable">
+                <img src="https://цбс.абакан.рф/museum-41-45/image/perekreshenko.jpg">
+                <div class="main-section-text">
+                    <span>Перекрещенко Екатерина <br>Федоровна<br>(1920 – 1944 гг.)</span>
+                </div>
+            </div>
+            <div id="chebodaevContainer" class="main-section scaleable">
+                <img src="https://цбс.абакан.рф/museum-41-45/image/chebodaev/1.png">
+                <div class="main-section-text">
+                    <span>Чебодаев Михаил <br>Иванович<br>(1922 - 1945 гг.)</span>
+                </div>
+            </div>
+            <div id="tihonovContainer" class="main-section scaleable">
+                <img src="https://цбс.абакан.рф/museum-41-45/image/tihonov/2.jpg">
+                <div class="main-section-text">
+                    <span>Тихонов Василий <br>Гаврилович<br>(1909 – 1976 гг.)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0px;">
+        <div style="background-color: #ffffff; padding: 20px; border-radius: 20px; box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);">
+            <a class="fancybox" data-fancybox="gallery-a" data-src="https://цбс.абакан.рф/museum-41-45/image/old_abakan.jpg"><img src="https://цбс.абакан.рф/museum-41-45/image/old_abakan.jpg" width="365px" height="250px" style="border-radius: 20px;"></a>
+            <a class="fancybox" data-fancybox="gallery-a" data-src="https://цбс.абакан.рф/museum-41-45/image/gorod.jpg"><img src="https://цбс.абакан.рф/museum-41-45/image/gorod.jpg" width="365px" height="250px" style="border-radius: 20px; margin-left: 20px;"></a>
+        </div>
+    </div>
+    <script type="text/javascript" src="imenamiGeroevScript.js"></script>
+</body>
+</html>

@@ -62,4 +62,17 @@ window.onload = function() {
 
         console.log(receivedPassword);
     }
+		
+	let descriptionsContainer = document.getElementById("descriptionsContainer");
+	let descriptionsContainerClickCounter = 0;
+	let menuInner = document.getElementById("menuInner");
+	let websiteInfo = document.getElementById("websiteInfo");
+
+	descriptionsContainer.onclick = function() {
+        descriptionsContainerClickCounter++;
+        if(descriptionsContainerClickCounter == 10) {
+			menuInner.classList.add("menu-inner-animation");
+			websiteInfo.classList.add("website-info-animation");
+        }
+    }
 }

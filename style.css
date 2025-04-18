@@ -4,6 +4,14 @@
     outline: none;
 }
 
+html {
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+}
+
 body {
     height: 100%;
     font-family: "Roboto", sans-serif;
@@ -11,6 +19,11 @@ body {
     font-style: normal;
     padding: 0;
     margin: 0;
+    overflow-x: hidden;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
 }
 
 .menu {
@@ -30,6 +43,7 @@ body {
     background-color: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(57px);
 }
 
 .default-image {
@@ -53,6 +67,14 @@ body {
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.05);
     padding: 20px;
+    transition-duration: 250ms;
+    user-select: none;
+}
+
+.description-container:active {
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(0.9);
+    transition-duration: 250ms;
 }
 
 .description-text {
@@ -97,6 +119,7 @@ body {
     font-size: 14px;
     font-weight: 500;
     transition-duration: 250ms;
+    cursor: pointer;
 }
 
 .default-button:hover {
@@ -174,7 +197,7 @@ body {
     align-items: center;
     justify-content: center;
     width: 50px;
-    height: 30px;
+    height: 29.5px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-left: none;
     border-radius: 0px 5px 5px 0px;
@@ -277,4 +300,49 @@ dialog {
 
 dialog::-webkit-scrollbar {
     display: none;
+}
+
+.website-info {
+    width: 360px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.5);
+    user-select: none;
+    padding: 10px 0px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(57px);
+}
+
+.creator-info {
+    margin-left: 5px;
+    display: flex;
+    align-items: center; 
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 4px;
+    font-size: 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition-duration: 500ms;
+}
+
+.creator-info:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    transition-duration: 500ms;
+}
+
+.website-info-animation {
+    transform: translateY(0px);
+    opacity: 1;
+    transition-duration: 500ms;
+}
+
+.menu-inner-animation {
+    transform: translateY(0px);
+    transition-duration: 500ms;
 }
