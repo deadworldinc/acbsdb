@@ -43,31 +43,31 @@ window.onload = function() {
     }
 
     buttonImenamiGeroev.onclick = function() {
-        window.open("/museum/imenamiGeroev/imenamiGeroev.html");
+        window.open("/museum/imenamiGeroev/imenamiGeroev.html", "_self");
     }
 
     buttonGospitali.onclick = function() {
-        window.open("/museum/gospitali/gospitali.html")
+        window.open("/museum/gospitali/gospitali.html", "_self")
     }
 
     buttonJivopis.onclick = function() {
-        window.open("/museum/jivopis/jivopis.html");
+        window.open("/museum/jivopis/jivopis.html", "_self");
     }
 
     buttonPromishlennost.onclick = function() {
-        window.open("/museum/promishlennost/promishlennost.html");
+        window.open("/museum/promishlennost/promishlennost.html", "_self");
     }
 
     buttonChtobiPomnili.onclick = function() {
-        window.open("/museum/uchastniki/uchastniki.html");
+        window.open("/museum/uchastniki/uchastniki.html", "_self");
     }
 
     buttonPamyatniki.onclick = function() {
-        window.open("/museum/pamyatniki/pamyatniki.html");
+        window.open("/museum/pamyatniki/pamyatniki.html", "_self");
     }
 
     buttonLiteratura.onclick = function() {
-        window.open("/museum/literatura/literatura.html");
+        window.open("/museum/literatura/literatura.html", "_self");
     }
 
     firstSourceLink.onclick = function(){
