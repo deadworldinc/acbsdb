@@ -189,11 +189,13 @@ body {
 }
 
 .link {
+    color: #2563eb;
     transition-duration: 500ms;
 }
 
 .link:hover {
-    color: red;
+    text-decoration: underline;
+    text-decoration-thickness: 2px !important;
     transition-duration: 500ms;
     cursor: pointer;
 }
@@ -228,11 +230,6 @@ body {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     padding: 10px;
-}
-
-.prom-table a {
-    color: black;
-    text-decoration: none;
 }
 
 .main-sections-container-second {
