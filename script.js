@@ -54,7 +54,7 @@ window.onload = function() {
         
         if(inputPassword.value == receivedPassword) {
             setCookie('signInStatus', 'signed', {});
-			window.open("/calendar/calendar.html", "_self");
+			window.open("/database/calendar.html", "_self");
         }
         else {
             setCookie('signInStatus', 'unsigned', {});
