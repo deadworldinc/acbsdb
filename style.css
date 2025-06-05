@@ -133,7 +133,7 @@ body {
 
 .tables-main-container {
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
     display: grid;
     grid-template-columns: 300px auto;
 }
@@ -166,6 +166,12 @@ body {
     justify-content: end;
     background-color: white;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.right-main-container {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100%;
 }
 
 .search-field-container {
@@ -281,6 +287,12 @@ td {
     text-align: center;
 }
 
+thead {
+    position: sticky;
+    top: 0;
+    background-color: #f3f4f6;
+}
+
 .main-table-cell {
     background-color: white;
     text-align: start;
@@ -297,6 +309,8 @@ dialog {
     border-radius: 10px;
     padding: 20px;
     width: 350px;
+    transform: scale(0.9);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
 }
 
 dialog::-webkit-scrollbar {
@@ -365,4 +379,45 @@ textarea {
 textarea::placeholder {
   font-size: 14px;
   font-family: Roboto, sans-serif;
+}
+
+[popover],
+dialog,
+::backdrop {
+  transition:
+    display 250ms allow-discrete,
+    overlay 250ms allow-discrete,
+    transform 250ms,
+    opacity 250ms;
+  opacity: 0;
+}
+
+:popover-open,
+:popover-open::backdrop,
+[open],
+[open]::backdrop {
+  opacity: 1;
+}
+
+[open] {
+  transform: scale(1);
+}
+
+@starting-style {
+  :popover-open,
+  :popover-open::backdrop,
+  [open],
+  [open]::backdrop {
+    opacity: 0;
+  }
+
+  dialog {
+    transform: scale(0.9) !important;
+  }
+}
+
+@layer demo.support {
+  html {
+    color-scheme: dark light;
+  }
 }

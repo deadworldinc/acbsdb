@@ -35,7 +35,7 @@ function getCookie(name) {
 
 window.onload = function() {
 	if (getCookie('signInStatus') == 'signed') {
-		window.open("tables.html", "_self");
+		window.open("/database/calendar.html", "_self");
 	} else {
 		setCookie('signInStatus', 'unsigned', {});
 	}
