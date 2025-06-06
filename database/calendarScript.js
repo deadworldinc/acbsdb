@@ -1,5 +1,5 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-import { read, writeFileXLSX } from "https://cdn.sheetjs.com/xlsx-0.20.3/package/xlsx.mjs";
+import { read, writeFileXLSX } from "https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js";
 
 const supabase = createClient('https://hlapzydzkeyttgmughiu.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhsYXB6eWR6a2V5dHRnbXVnaGl1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjkxNDc4NzAsImV4cCI6MjA0NDcyMzg3MH0.fNlhkzfU5RZURQpfu1sTz4EjWL-ImWRvGNx0mMBwuE8');
 
@@ -167,7 +167,8 @@ window.onload = async function() {
                     inputTagEdit.value = receivedData[0].tag;
         
                     inputsContainer.style.display = "block";
-                    buttonGetEntry.innerText = "Редактировать запись";
+                    buttonGetEntry.classList.add("button-positive");
+                    buttonGetEntry.innerText = "Сохранить";
                 }
                 else {
                     const { error } = await supabase
@@ -177,6 +178,7 @@ window.onload = async function() {
                     
                     inputId.disabled = false;
                     inputsContainer.style.display = "none";
+                    buttonGetEntry.classList.remove("button-positive");
                     buttonGetEntry.innerText = "Получить данные";
                     dialogEditEntry.close();
                     getData(false);

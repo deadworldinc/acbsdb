@@ -93,7 +93,7 @@ body {
 .input-field {
     width: 100%;
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 8px;
     margin-top: 10px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     background-color: rgba(0, 0, 0, 0.05);
@@ -131,6 +131,21 @@ body {
     transition-duration: 250ms;
 }
 
+.button-positive {
+    background-color: #8cffc4 !important;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.button-neutral {
+    background-color: #a4e2ff;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.button-negative {
+    background-color: #ff7d7d;
+    color: rgba(0, 0, 0, 0.5);
+}
+
 .tables-main-container {
     width: 100%;
     height: 100vh;
@@ -142,7 +157,7 @@ body {
     width: 100%;
     min-height: 100vh;
     display: grid;
-    grid-template-rows: 50px auto;
+    grid-template-rows: 60px auto;
 }
 
 .left-header {
@@ -177,7 +192,7 @@ body {
 .search-field-container {
     width: 220px;
     height: 30px;
-    margin-right: 20px;
+    margin-right: 15px;
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -220,8 +235,8 @@ body {
 
 .button-export {
     width: 100px;
-    height: 30px;
-    margin-right: 20px;
+    height: 32px;
+    margin-right: 15px;
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -233,18 +248,11 @@ body {
 }
 
 .button-export:hover {
-    background-color: #4280ef;
-    color: white;
-    transition-duration: 250ms;
-    border: 1px solid #4280ef;
+    filter: brightness(0.95);
 }
 
-.button-export:hover .button-export-text {
-    opacity: 1;
-}
-
-.button-export:hover .fa {
-    opacity: 1;
+.button-export:active {
+    transform: scale(0.9);
 }
 
 .fa {
@@ -261,9 +269,11 @@ body {
 }
 
 .tables-menu-item {
+    display: flex;
+    align-items: center;
     padding: 20px;
     margin-bottom: 20px;
-    border-radius: 10px;
+    border-radius: 8px;
     transition-duration: 250ms;
     cursor: pointer;
 }
@@ -297,24 +307,72 @@ thead {
     background-color: white;
     text-align: start;
 }
-
-dialog::backdrop {
-    background: rgba(0, 0, 0, 0.5);
-}
   
 dialog {
     border: none;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    border-radius: 10px;
-    padding: 20px;
-    width: 350px;
-    transform: scale(0.9);
+    border-radius: 8px;
+    padding: 0;
+    width: 380px;
+    transform: translateY(-25px);
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+dialog svg {
+    opacity: 0.25;
+    transition-duration: 250ms;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+dialog svg:hover {
+    opacity: 1;
+}
+
+dialog svg:active {
+    transform: scale(0.9);
 }
 
 dialog::-webkit-scrollbar {
     display: none;
+}
+
+dialog button {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: none !important;
+}
+
+.close-dialog-button {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+}
+
+dialog button:hover {
+    filter: brightness(0.95);
+    border: 1px solid rgba(0, 0, 0, 0.25) !important;
+}
+
+dialog input {
+    height: 40px;
+    width: 328px !important;
+    padding: 0 10px !important;
+}
+
+dialog input:focus, textarea:focus {
+    background-color: #f3f4f6 !important;
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
 }
 
 .website-info {
@@ -363,17 +421,13 @@ dialog::-webkit-scrollbar {
 }
 
 textarea {
-  margin-top: 10px;
-  padding: 10px 20px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 20px;
-  width: 100%;
-  height: 100px;
-  text-align: center;
+  display: block;
+  width: 318px !important;
+  height: 50px;
   resize: none;
   font-family: Roboto, sans-serif;
-  text-align: start;
-  font-size: 14px;
+  text-align: start !important;
+  font-size: 14px !important;
 }
 
 textarea::placeholder {
@@ -400,7 +454,7 @@ dialog,
 }
 
 [open] {
-  transform: scale(1);
+  transform: translateX(0px);
 }
 
 @starting-style {
@@ -412,7 +466,7 @@ dialog,
   }
 
   dialog {
-    transform: scale(0.9) !important;
+    transform: translateY(25px) !important;
   }
 }
 
