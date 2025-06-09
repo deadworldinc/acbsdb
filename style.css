@@ -437,6 +437,16 @@ textarea::placeholder {
   font-family: Roboto, sans-serif;
 }
 
+.sorttable-label {
+    font-size: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    padding: 1px 4px;
+    margin-left: 5px;
+    color: rgba(0, 0, 0, 0.75);
+    border-radius: 4px;
+    user-select: none;
+}
+
 [popover],
 dialog,
 ::backdrop {
