@@ -49,18 +49,16 @@ window.onload = function() {
         .from('users')
         .select('password')
         .eq('login', `${inputLogin.value}`);
-
-        let receivedPassword = JSON.parse(JSON.stringify(data[0])).password;
         
-        if(inputPassword.value == receivedPassword) {
-            setCookie('signInStatus', 'signed', {});
-			window.open("/database/calendar.html", "_self");
-        }
-        else {
-            setCookie('signInStatus', 'unsigned', {});
-        }
-
-        console.log(receivedPassword);
+		if (JSON.parse(JSON.stringify(data[0]) != null)) {
+			if(inputPassword.value == JSON.parse(JSON.stringify(data[0])).password) {
+				setCookie('signInStatus', 'signed', {});
+				window.open("/database/calendar.html", "_self");
+			}
+			else {
+				setCookie('signInStatus', 'unsigned', {});
+			}
+		}
     }
 		
 	let descriptionsContainer = document.getElementById("descriptionsContainer");

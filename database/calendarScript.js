@@ -159,16 +159,18 @@ window.onload = async function() {
                     .eq('id', `${inputId.value}`);
         
                     let receivedData = JSON.parse(JSON.stringify(data));
-        
-                    inputId.disabled = true;
-                    inputTitleEdit.value = receivedData[0].title;
-                    inputDescriptionEdit.value = receivedData[0].description;
-                    inputDateEdit.value = receivedData[0].date;
-                    inputTagEdit.value = receivedData[0].tag;
-        
-                    inputsContainer.style.display = "block";
-                    buttonGetEntry.classList.add("button-positive");
-                    buttonGetEntry.innerText = "Сохранить";
+
+                    if (receivedData.length > 0) {
+                        inputId.disabled = true;
+                        inputTitleEdit.value = receivedData[0].title;
+                        inputDescriptionEdit.value = receivedData[0].description;
+                        inputDateEdit.value = receivedData[0].date;
+                        inputTagEdit.value = receivedData[0].tag;
+            
+                        inputsContainer.style.display = "block";
+                        buttonGetEntry.classList.add("button-positive");
+                        buttonGetEntry.innerText = "Сохранить";
+                    }
                 }
                 else {
                     const { error } = await supabase
@@ -177,6 +179,7 @@ window.onload = async function() {
                     .eq('id', inputId.value);
                     
                     inputId.disabled = false;
+                    inputId.value = "";
                     inputsContainer.style.display = "none";
                     buttonGetEntry.classList.remove("button-positive");
                     buttonGetEntry.innerText = "Получить данные";

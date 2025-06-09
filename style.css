@@ -133,16 +133,19 @@ body {
 
 .button-positive {
     background-color: #8cffc4 !important;
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
     color: rgba(0, 0, 0, 0.5);
 }
 
 .button-neutral {
     background-color: #a4e2ff;
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
     color: rgba(0, 0, 0, 0.5);
 }
 
 .button-negative {
     background-color: #ff7d7d;
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
     color: rgba(0, 0, 0, 0.5);
 }
 
@@ -224,13 +227,12 @@ body {
     border-left: none;
     border-radius: 0px 5px 5px 0px;
     transition-duration: 250ms;
+    cursor: pointer;
+    background-color: white;
 }
 
 .button-search:hover {
-    background-color: #4280ef;
-    color: white;
-    transition-duration: 250ms;
-    cursor: pointer;
+    filter: brightness(0.95);
 }
 
 .button-export {
@@ -315,7 +317,7 @@ dialog {
     border-radius: 8px;
     padding: 0;
     width: 380px;
-    transform: translateY(-25px);
+    transform: translateY(-10px);
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -355,7 +357,7 @@ dialog button {
 
 .close-dialog-button {
     background-color: #ffffff;
-    color: #000000;
+    color: rgba(0, 0, 0, 0.75);
     border: 1px solid rgba(0, 0, 0, 0.15) !important;
 }
 

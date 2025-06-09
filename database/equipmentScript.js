@@ -159,16 +159,18 @@ window.onload = async function() {
                     .eq('id', `${inputId.value}`);
         
                     let receivedData = JSON.parse(JSON.stringify(data));
-        
-                    inputId.disabled = true;
-                    inputBranchEdit.value = receivedData[0].branch;
-                    inputNameEdit.value = receivedData[0].name;
-                    inputInventoryNumberEdit.value = receivedData[0].inventory_number;
-                    inputNoteEdit.value = receivedData[0].note;
-        
-                    inputsContainer.style.display = "block";
-                    buttonGetEntry.classList.add("button-positive");
-                    buttonGetEntry.innerText = "Сохранить";
+
+                    if (receivedData.length > 0) {
+                        inputId.disabled = true;
+                        inputBranchEdit.value = receivedData[0].branch;
+                        inputNameEdit.value = receivedData[0].name;
+                        inputInventoryNumberEdit.value = receivedData[0].inventory_number;
+                        inputNoteEdit.value = receivedData[0].note;
+            
+                        inputsContainer.style.display = "block";
+                        buttonGetEntry.classList.add("button-positive");
+                        buttonGetEntry.innerText = "Сохранить";
+                    }
                 }
                 else {
                     const { error } = await supabase
@@ -177,6 +179,7 @@ window.onload = async function() {
                     .eq('id', inputId.value);
                     
                     inputId.disabled = false;
+                    inputId.value = "";
                     inputsContainer.style.display = "none";
                     buttonGetEntry.classList.remove("button-positive");
                     buttonGetEntry.innerText = "Получить данные";
