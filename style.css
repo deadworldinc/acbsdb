@@ -63,7 +63,8 @@ body {
     margin-top: 20px;
     width: 260px;
     border-radius: 10px;
-    display: flex;
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.05);
     padding: 20px;
@@ -81,6 +82,7 @@ body {
     width: fit-content;
     font-size: 14px;
     opacity: 0.75;
+    margin-left: 15px;
 }
 
 .inputs-container {
@@ -486,4 +488,82 @@ dialog,
   html {
     color-scheme: dark light;
   }
+}
+
+@media screen and (max-device-width: 768px) {
+    .tables-main-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .left-main-container {
+        display: inline-flex;
+        position: absolute;
+        width: 100%;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        height: 50px;
+        padding: 0;
+        bottom: 0;
+        z-index: 10;
+    }
+
+    .left-main-container div {
+        margin: 0;
+    }
+
+    .tables-menu-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .left-main-container span {
+        display: none;
+    }
+
+    .left-header {
+        border-right: 0;
+    }
+
+    .right-header {
+        display: none;
+    }
+
+    .right-main-container {
+        position: absolute;
+        top: 60px;
+        height: calc(100% - 110px);
+    }
+
+    tr td:last-child {
+        display: none;
+    }
+}
+
+
+@media screen and (max-device-width: 375px) {
+    .menu-inner {
+        width: 280px;
+    }
+
+    .description-container {
+        width: 240px;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    dialog {
+        width: 330px;
+    }
+
+    dialog div {
+        width: 300px !important;
+    }
+
+    dialog input {
+        width: 278px !important;
+    }
 }
