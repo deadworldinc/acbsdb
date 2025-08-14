@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<title>База данных оборудования ЦБС</title>
+	<link rel="stylesheet" type="text/css" href="/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+	<script src="/database/sorttable.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body style="display: flex; justify-content: center;">
+    <div style="width: 100%; overflow-y: scroll;">
+        <table id="mainTable" class="main-table sortable">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Филиал</td>
+                    <td>Наименование</td>
+                    <td>Инв. номер</td>
+                    <td>Примечание</td>
+                </tr>
+            </thead>
+            <tr id="tableRow"></tr>
+        </table>
+    </div>
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+        import * as XLSX from 'https://unpkg.com/xlsx/xlsx.mjs';
+
+        const supabase = createClient('https://hlapzydzkeyttgmughiu.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhsYXB6eWR6a2V5dHRnbXVnaGl1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjkxNDc4NzAsImV4cCI6MjA0NDcyMzg3MH0.fNlhkzfU5RZURQpfu1sTz4EjWL-ImWRvGNx0mMBwuE8');
+        
+        const { data, error } = await supabase
+        .from('equipment')
+        .select()
+        .order('id', { ascending: true })
+        let receivedData = JSON.parse(JSON.stringify(data));
+
+        for (let entry in receivedData) {
+            tableRow.insertAdjacentHTML('beforeBegin', 
+                `
+                <tr class="table-rows">
+                    <td class="main-table-cell">${receivedData[entry].id}</td>
+                    <td class="main-table-cell">${receivedData[entry].branch}</td>
+                    <td class="main-table-cell">${receivedData[entry].name}</td>
+                    <td class="main-table-cell">${receivedData[entry].inventory_number}</td>
+                    <td class="main-table-cell">${receivedData[entry].note.replaceAll("\n", "<br>")}</td>
+                </tr>
+                `);
+        }
+   </script>
+</body>
