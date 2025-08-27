@@ -3,6 +3,9 @@ import * as XLSX from 'https://unpkg.com/xlsx/xlsx.mjs';
 
 const supabase = createClient('https://hlapzydzkeyttgmughiu.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhsYXB6eWR6a2V5dHRnbXVnaGl1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjkxNDc4NzAsImV4cCI6MjA0NDcyMzg3MH0.fNlhkzfU5RZURQpfu1sTz4EjWL-ImWRvGNx0mMBwuE8');
 
+let conversion;
+let docDefinition;
+
 async function getData(isSearch, searchColumn, searchValue) {
     let tableRow = document.getElementById("tableRow");
 
@@ -34,11 +37,21 @@ async function getData(isSearch, searchColumn, searchValue) {
             <tr class="table-rows">
                 <td class="main-table-cell">${receivedData[entry].id}</td>
                 <td class="main-table-cell">${receivedData[entry].branch}</td>
+                <td class="main-table-cell">${receivedData[entry].responsible_person}</td>
                 <td class="main-table-cell">${receivedData[entry].name}</td>
                 <td class="main-table-cell">${receivedData[entry].inventory_number}</td>
-                <td class="main-table-cell">${receivedData[entry].note.replaceAll("\n", "<br>")}</td>
+                <td class="main-table-cell">${receivedData[entry].amount} руб.</td>
+                <td class="main-table-cell">${receivedData[entry].quantity} шт.</td>
             </tr>
             `);
+    }
+
+    let tableEntries = document.querySelectorAll(".main-table-cell");
+    for (let i = 0; i < tableEntries.length; i++) {
+        let tableEntry = tableEntries[i];
+        tableEntry.ondblclick = function() {
+            console.log(tableEntry.parentElement.getElementsByClassName("main-table-cell")[0].textContent);
+        }        
     }
 }
 
@@ -84,6 +97,51 @@ function getCookie(name) {
 	return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
+function generatePDF() {
+    conversion = htmlToPdfmake(
+    `
+        <div> 
+            <p style="text-align: center; font-size: 18px;"><strong>Муниципальное бюджетное учреждение города Абакана<br>«Абаканская централизованная библиотечная система»</strong></p>
+            <span style="font-size: 14px;">
+                Отчет, содержащий сведения о компьютерном оборудовании библиотек-филиалов Абаканской централизованной библиотечной системы.
+                <br><br>Отчет составлен <span style="font-weight: bold;">${new Date().toLocaleDateString()}</span> в 
+                <span style="font-weight: bold;">${new Date().toLocaleTimeString('en-GB', { hour: "numeric", minute: "numeric"})}</span>
+                на основе информации, содержащейся в базе данных оборудования ЦБС.
+            </span>
+            ${document.getElementsByClassName("right-main-container")[0].getHTML()
+                .replaceAll('<span class="sorttable-label" id="sorttable_sortrevind">ASC</span>', '')
+                .replaceAll('<span class="sorttable-label" id="sorttable_sortfwdind">DESC</span>', '')
+                .replaceAll('class="main-table-cell"', 'class="main-table-cell" style="padding: 5px; font-size: 14px; text-align: center; vertical-align: baseline;"')
+                .replaceAll('class="table-header-title"', 'class="table-header-title" style="background-color: #f5f5f5; padding: 5px; font-size: 14px; text-align: center; vertical-align: baseline;"')
+                .replaceAll('class="table-header-title sorttable_sorted"', 'class="table-header-title" style="background-color: #f5f5f5; padding: 5px; font-size: 14px; text-align: center; vertical-align: baseline;"')
+                .replaceAll('class="table-header-title sorttable_sorted_reverse"', 'class="table-header-title" style="background-color: #f5f5f5; padding: 5px; font-size: 14px; text-align: center; vertical-align: baseline;"')
+            }
+            <span style="font-size: 10px; text-align: center;">
+                acbsdb.ru • ${new Date().toLocaleDateString()} • ${new Date().toLocaleTimeString('en-GB', { hour: "numeric", minute: "numeric"})}
+            </span> 
+        </div> 
+    `);
+    docDefinition = { 
+        pageOrientation: "landscape",
+        footer: (currentPage, pageCount) => {
+            var t = {
+                layout: "noBorders",
+                fontSize: 10,
+                margin: [375, 0, 0, 0],
+                table: {
+                body: [
+                    [
+                    { text: "Страница " + currentPage.toString() + " из " + pageCount },
+                    ]
+                ]
+                }
+            };
+            return t;
+        },
+        content : conversion 
+    };
+}
+
 window.onload = async function() {
     if (getCookie('signInStatus') == 'signed') {    
         let buttonRefreshTable = document.getElementById("buttonRefreshTable");
@@ -104,9 +162,9 @@ window.onload = async function() {
         let buttonSearchByName = document.getElementById("buttonSearchByName");
         let inputSearchByInventoryNumber = document.getElementById("inputSearchByInventoryNumber");
         let buttonSearchByInventoryNumber = document.getElementById("buttonSearchByInventoryNumber");
-        let inputSearchByNote = document.getElementById("inputSearchByNote");
-        let buttonSearchByNote = document.getElementById("buttonSearchByNote");
-        let buttonExport = document.getElementById("buttonExport");
+        let buttonExportXLSX = document.getElementById("buttonExportXLSX");
+        let buttonExportPDF = document.getElementById("buttonExportPDF");
+        let buttonPrintPDF = document.getElementById("buttonPrintPDF");
 
         getData(false);
 
@@ -120,18 +178,31 @@ window.onload = async function() {
 
             buttonSave.onclick = async function() {
                 let inputBranch = document.getElementById("inputBranch");
+                let inputResponsiblePerson = document.getElementById("inputResponsiblePerson");
                 let inputName = document.getElementById("inputName");
                 let inputInventoryNumber = document.getElementById("inputInventoryNumber");
-                let inputNote = document.getElementById("inputNote");
+                let inputAmount = document.getElementById("inputAmount");
+                let inputQuantity = document.getElementById("inputQuantity");
 
                 const { error } = await supabase
                 .from('equipment')
-                .insert({ branch: inputBranch.value, name: inputName.value, inventory_number: inputInventoryNumber.value, note: inputNote.value });
+                .insert(
+                    { 
+                        branch: inputBranch.value, 
+                        responsible_person: inputResponsiblePerson.value,
+                        name: inputName.value, 
+                        inventory_number: inputInventoryNumber.value, 
+                        amount: inputAmount.value,
+                        quantity: inputQuantity.value
+                    }
+                );
 
                 inputBranch.value = "";
+                inputResponsiblePerson.value = "";
                 inputName.value = "";
                 inputInventoryNumber.value = "";
-                inputNote.value = "";
+                inputAmount.value = "";
+                inputQuantity.value = "";
                 
                 dialogAddEntry.close();
                 getData(false);
@@ -148,9 +219,11 @@ window.onload = async function() {
 
             buttonGetEntry.onclick = async function() {
                 let inputBranchEdit = document.getElementById("inputBranchEdit");
+                let inputResponsiblePersonEdit = document.getElementById("inputResponsiblePersonEdit");
                 let inputNameEdit = document.getElementById("inputNameEdit");
                 let inputInventoryNumberEdit = document.getElementById("inputInventoryNumberEdit");
-                let inputNoteEdit = document.getElementById("inputNoteEdit");
+                let inputAmountEdit = document.getElementById("inputAmountEdit");
+                let inputQuantityEdit = document.getElementById("inputQuantityEdit");
 
                 if (inputId.disabled == false) {
                     const { data, error } = await supabase
@@ -163,25 +236,34 @@ window.onload = async function() {
                     if (receivedData.length > 0) {
                         inputId.disabled = true;
                         inputBranchEdit.value = receivedData[0].branch;
+                        inputResponsiblePersonEdit.value = receivedData[0].responsible_person;
                         inputNameEdit.value = receivedData[0].name;
                         inputInventoryNumberEdit.value = receivedData[0].inventory_number;
-                        inputNoteEdit.value = receivedData[0].note;
+                        inputAmountEdit.value = receivedData[0].amount;
+                        inputQuantityEdit.value = receivedData[0].quantity;
             
                         inputsContainer.style.display = "block";
-                        buttonGetEntry.classList.add("button-positive");
                         buttonGetEntry.innerText = "Сохранить";
                     }
                 }
                 else {
                     const { error } = await supabase
                     .from('equipment')
-                    .update({ branch: inputBranchEdit.value, name: inputNameEdit.value, inventory_number: inputInventoryNumberEdit.value, note: inputNoteEdit.value })
+                    .update(
+                        { 
+                            branch: inputBranchEdit.value, 
+                            responsible_person: inputResponsiblePersonEdit.value,
+                            name: inputNameEdit.value, 
+                            inventory_number: inputInventoryNumberEdit.value, 
+                            amount: inputAmountEdit.value,
+                            quantity: inputQuantityEdit.value
+                        }
+                    )
                     .eq('id', inputId.value);
                     
                     inputId.disabled = false;
                     inputId.value = "";
                     inputsContainer.style.display = "none";
-                    buttonGetEntry.classList.remove("button-positive");
                     buttonGetEntry.innerText = "Получить данные";
                     dialogEditEntry.close();
                     getData(false);
@@ -254,16 +336,7 @@ window.onload = async function() {
             }
         }
 
-        buttonSearchByNote.onclick = function() {
-            if (inputSearchByNote.value != "") {
-                getData(true, 'note', `%${inputSearchByNote.value}%`);
-            }
-            else {
-                getData(false);
-            }
-        }
-
-        buttonExport.onclick = async function() {
+        buttonExportXLSX.onclick = async function() {
             let receivedData;
 
             const { data, error } = await supabase
@@ -272,9 +345,26 @@ window.onload = async function() {
             .csv();
             receivedData = data;
 
-            let csv_string = receivedData.toString().replace("id", "ID").replace("branch", "Филиал").replace("name", "Наименование").replace("inventory_number", "Инв. номер").replace("note", "Примечание");
+            let csv_string = receivedData.toString()
+                .replace("id", "ID")
+                .replace("branch", "Филиал")
+                .replace("name", "Наименование")
+                .replace("inventory_number", "Инв. номер")
+                .replace("responsible_person", "Отв. лицо")
+                .replace("amount", "Сумма")
+                .replace("quantity", "Кол-во");
             let xlsxFile = XLSX.read(csv_string, { type: "string" });
-            XLSX.writeFileXLSX(xlsxFile, "Database.xlsx");
+            XLSX.writeFileXLSX(xlsxFile, "Equipment.xlsx");
+        }
+
+        buttonExportPDF.onclick = function() {
+            generatePDF();
+            pdfMake.createPdf(docDefinition).download('Equipment.pdf');
+        }
+
+        buttonPrintPDF.onclick = function() {
+            generatePDF();
+            pdfMake.createPdf(docDefinition).print();
         }
     } else {
         window.open("/index.html", "_self");

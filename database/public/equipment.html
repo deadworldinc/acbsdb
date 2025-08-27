@@ -13,12 +13,14 @@
     <div style="width: 100%; overflow-y: scroll;">
         <table id="mainTable" class="main-table sortable">
             <thead>
-                <tr>
+                <tr class="table-header">
                     <td>ID</td>
                     <td>Филиал</td>
+                    <td>Ответственное лицо</td>
                     <td>Наименование</td>
                     <td>Инв. номер</td>
-                    <td>Примечание</td>
+                    <td>Сумма</td>
+                    <td>Количество</td>
                 </tr>
             </thead>
             <tr id="tableRow"></tr>
@@ -42,9 +44,11 @@
                 <tr class="table-rows">
                     <td class="main-table-cell">${receivedData[entry].id}</td>
                     <td class="main-table-cell">${receivedData[entry].branch}</td>
+                    <td class="main-table-cell">${receivedData[entry].responsible_person}</td>
                     <td class="main-table-cell">${receivedData[entry].name}</td>
                     <td class="main-table-cell">${receivedData[entry].inventory_number}</td>
-                    <td class="main-table-cell">${receivedData[entry].note.replaceAll("\n", "<br>")}</td>
+                    <td class="main-table-cell">${receivedData[entry].amount} руб.</td>
+                    <td class="main-table-cell">${receivedData[entry].quantity} шт.</td>
                 </tr>
                 `);
         }
